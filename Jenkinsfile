@@ -12,6 +12,11 @@ pipeline {
             defaultValue: 'demo',
             description: 'Target environment'
         )
+        choice(
+            name: 'DEPLOY_REGION',
+            choices: ['us-east-1', 'eu-central-1', 'ap-southeast-2'],
+            description: 'Region to use for this test deployment'
+        )
         booleanParam(
             name: 'RUN_TESTS',
             defaultValue: true,
@@ -29,6 +34,7 @@ pipeline {
             steps {
                 echo "Release name: ${params.RELEASE_NAME}"
                 echo "Target environment: ${params.Ahmed_Parameter}"
+                echo "Deploy region: ${params.DEPLOY_REGION}"
                 echo "Run tests: ${params.RUN_TESTS}"
                 echo 'Release notes:'
                 echo params.RELEASE_NOTES
@@ -44,6 +50,7 @@ Release Package Artifact
 =========================================
 Release Name: ${params.RELEASE_NAME}
 Environment : ${params.Ahmed_Parameter}
+Region      : ${params.DEPLOY_REGION}
 Build Number: ${env.BUILD_NUMBER}
 Notes       : ${params.RELEASE_NOTES}
 =========================================
